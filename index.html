@@ -96,7 +96,7 @@
     <div id="animation-container">
         <!-- More Image Slides at the Start -->
         <div class="slide active">
-            <image src="memories/biet.png" alt="Slide 1"></image>
+            <image src="memories/biet.png" alt="Slide 1">
         </div>
         <div class="slide">
             <img src="memories/263356.jpg" alt="Slide 2">
@@ -144,43 +144,48 @@
         <button id="toggleMusic">▶</button>
         <span>Playing: "Friendship Song"</span>
         <audio id="backgroundMusic" loop>
-            <source src="memories/05 - O My Friend  - SenSongsMp3.co.mp3" type="audio/mpeg">
+            <source src="memories/song.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
 
     <script>
-       const slides = document.querySelectorAll('.slide');
-        let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
 
-        function showNextSlide() {
-            slides[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % slides.length;
-            slides[currentIndex].classList.add('active');
+    function showNextSlide() {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add('active');
 
-            const currentVideo = slides[currentIndex].querySelector('video');
-            if (currentVideo) {
-                currentVideo.currentTime = 0;
-                currentVideo.play();
-                currentVideo.onended = showNextSlide;
-            } else {
-                setTimeout(showNextSlide, 5000);
-            }
+        const currentVideo = slides[currentIndex].querySelector('video');
+        if (currentVideo) {
+            currentVideo.currentTime = 0;
+            currentVideo.play();
+            currentVideo.onended = showNextSlide;
+        } else {
+            setTimeout(showNextSlide, 5000);
         }
+    }
 
-        setTimeout(showNextSlide, 5000);
+    setTimeout(showNextSlide, 5000);
 
-        // Music Toggle Function
-        toggleMusicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                musicPlayer.pause();
-                toggleMusicBtn.textContent = '▶';
-            } else {
-                musicPlayer.play();
-                toggleMusicBtn.textContent = '❚❚';
-            }
-            isPlaying = !isPlaying;
-        });
-    </script>
+    // Music Toggle Function
+    const toggleMusicBtn = document.getElementById('toggleMusic');
+    const musicPlayer = document.getElementById('backgroundMusic');
+    let isPlaying = false;
+
+    toggleMusicBtn.addEventListener('click', () => {
+        if (isPlaying) {
+            musicPlayer.pause();
+            toggleMusicBtn.textContent = '▶';
+        } else {
+            musicPlayer.play();
+            toggleMusicBtn.textContent = '❚❚';
+        }
+        isPlaying = !isPlaying;
+    });
+</script>
+
 </body>
 </html>
